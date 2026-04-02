@@ -4,16 +4,20 @@ import Reveal from "../shared/Reveal";
 import SectionLabel from "../shared/SectionLabel";
 import { PROFILE } from "../data/data";
 import { FONTS, COLORS } from "../data/tokens";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } from "../data/emailjs";
 
 export default function ContactSection() {
-  const [copied, setCopied] = useState(null);
+  const [copied, setCopied]       = useState(null);
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
-  const [errors, setErrors] = useState({});
-  const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
-  const bp = useBreakpoint();
+  const [errors, setErrors]       = useState({});
+  const [sending, setSending]     = useState(false);
+  const [sent, setSent]           = useState(false);
+  const [sendError, setSendError] = useState(null);
+
+  const bp       = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
-  const px = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
+  const px       = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
 
   const copy = (text, key) => {
     navigator.clipboard.writeText(text);
@@ -34,29 +38,46 @@ export default function ContactSection() {
     return e;
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const e = validate();
     if (Object.keys(e).length > 0) { setErrors(e); return; }
+
     setErrors({});
+    setSendError(null);
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  formState.name,
+          from_email: formState.email,
+          message:    formState.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
       setSent(true);
       setFormState({ name: "", email: "", message: "" });
       setTimeout(() => setSent(false), 4000);
-    }, 1200);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setSendError("Failed to send — please email directly at " + PROFILE.email);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (field, value) => {
     setFormState((s) => ({ ...s, [field]: value }));
-    // Clear error on change
     if (errors[field]) setErrors((e) => { const next = { ...e }; delete next[field]; return next; });
+    if (sendError) setSendError(null);
   };
 
   const contacts = [
-    { key: "email", icon: "✉", label: "Email", value: PROFILE.email, copyable: true },
-    { key: "phone", icon: "✆", label: "Phone", value: PROFILE.phone, copyable: true },
-    { key: "github", icon: "⌥", label: "GitHub", value: PROFILE.github, copyable: false },
+    { key: "email",    icon: "✉", label: "Email",    value: PROFILE.email,    copyable: true  },
+    { key: "phone",    icon: "✆", label: "Phone",    value: PROFILE.phone,    copyable: true  },
+    { key: "github",   icon: "⌥", label: "GitHub",   value: PROFILE.github,   copyable: false },
     { key: "location", icon: "◎", label: "Location", value: PROFILE.location, copyable: false },
   ];
 
@@ -217,6 +238,12 @@ export default function ContactSection() {
                 {errorMsg("message")}
               </div>
 
+              {sendError && (
+                <p style={{ fontFamily: FONTS.mono, fontSize: 9, color: "rgba(239,68,68,0.9)", margin: 0, letterSpacing: "0.05em" }}>
+                  ✕ {sendError}
+                </p>
+              )}
+
               <button
                 onClick={handleSend}
                 disabled={sending || sent}
@@ -237,10 +264,6 @@ export default function ContactSection() {
               >
                 {sent ? "✓ Message Sent!" : sending ? "sending..." : "Send Message →"}
               </button>
-
-              <p style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.22)", margin: 0, lineHeight: 1.6 }}>
-                // demo form — or reach out directly via email
-              </p>
             </div>
           </Reveal>
         </div>
