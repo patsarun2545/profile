@@ -1,9 +1,11 @@
+import { FONTS, COLORS } from "../data/tokens";
+
 export default function SectionLabel({ number, title, isMobile }) {
   return (
     <div>
       <div
         style={{
-          fontFamily: "'Fira Code', monospace",
+          fontFamily: FONTS.mono,
           fontSize: 11,
           color: "rgba(34,197,94,0.5)",
           letterSpacing: "0.2em",
@@ -13,10 +15,10 @@ export default function SectionLabel({ number, title, isMobile }) {
       <h2
         style={{
           margin: 0,
-          fontFamily: "'Syne', sans-serif",
+          fontFamily: FONTS.display,
           fontSize: isMobile ? 30 : 44,
           fontWeight: 800,
-          color: "#fff",
+          color: COLORS.white,
           lineHeight: 1,
           display: "flex",
           alignItems: "baseline",
@@ -29,7 +31,7 @@ export default function SectionLabel({ number, title, isMobile }) {
           style={{
             width: 48,
             height: 2,
-            background: "#22c55e",
+            background: COLORS.green,
             display: "inline-block",
             marginBottom: 5,
           }}

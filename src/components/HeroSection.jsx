@@ -26,12 +26,13 @@ export default function HeroSection() {
     <section
       id="about"
       style={{
-        minHeight: "100vh",
+        minHeight: isMobile ? "auto" : "100vh",
         display: "flex",
         alignItems: "center",
-        padding: `80px ${px} ${isMobile ? "60px" : "0"}`,
+        padding: `80px ${px} ${isMobile ? "80px" : "100px"}`,
         position: "relative",
         overflow: "hidden",
+        borderBottom: "1px solid rgba(255,255,255,0.10)",
       }}
     >
       {/* Background grid */}
@@ -74,11 +75,12 @@ export default function HeroSection() {
             ...fadeUp(0.2),
             margin: 0,
             fontFamily: "'Syne', sans-serif",
-            fontSize: isMobile ? "clamp(36px, 11vw, 52px)" : "clamp(44px, 7vw, 80px)",
+            fontSize: isMobile ? "clamp(28px, 9vw, 44px)" : "clamp(44px, 7vw, 80px)",
             fontWeight: 800,
             lineHeight: 1.0,
             letterSpacing: "-0.03em",
             color: "#fff",
+            wordBreak: "break-word",
           }}
         >
           Patsarun
@@ -196,30 +198,35 @@ export default function HeroSection() {
           style={{
             ...fadeUp(0.65),
             display: "flex",
+            flexDirection: isMobile ? "column" : "row",
             marginTop: isMobile ? 44 : 60,
             borderTop: "1px solid rgba(255,255,255,0.10)",
             paddingTop: 32,
-            gap: 0,
+            gap: isMobile ? 24 : 0,
           }}
         >
           {[
-            { val: 4, suffix: " Projects", label: "Completed" },
-            { val: 4, suffix: " Stacks", label: "Tech Mastered" },
-            { val: 1, suffix: " Internship", label: "Experience" },
+            { val: 4, suffix: "Projects", label: "Completed" },
+            { val: 4, suffix: "Stacks", label: "Tech Mastered" },
+            { val: 1, suffix: "Internship", label: "Experience" },
           ].map((s, i) => (
             <div
               key={i}
               style={{
                 flex: 1,
                 textAlign: isMobile ? "center" : "left",
-                paddingRight: i < 2 ? (isMobile ? 0 : 28) : 0,
-                paddingLeft: i > 0 ? (isMobile ? 0 : 28) : 0,
+                paddingRight: i < 2 && !isMobile ? 28 : 0,
+                paddingLeft: i > 0 && !isMobile ? 28 : 0,
                 borderRight: i < 2 && !isMobile ? "1px solid rgba(255,255,255,0.10)" : "none",
+                borderBottom: i < 2 && isMobile ? "1px solid rgba(255,255,255,0.08)" : "none",
+                paddingBottom: i < 2 && isMobile ? 24 : 0,
               }}
             >
-              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: isMobile ? 22 : 30, fontWeight: 800, color: "#22c55e" }}>
-                <AnimatedNumber value={s.val} suffix={s.suffix} />
-              </div>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: isMobile ? 22 : 30, fontWeight: 800, color: "#22c55e" }}>
+              <AnimatedNumber value={s.val} />
+              <br />
+              <span>{s.suffix}</span>
+            </div>
               <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.5)", marginTop: 4, letterSpacing: "0.1em" }}>
                 {s.label}
               </div>

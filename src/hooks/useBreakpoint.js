@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 
+const getBp = () => {
+  if (typeof window === "undefined") return "lg";
+  const w = window.innerWidth;
+  if (w < 480) return "xs";
+  if (w < 640) return "sm";
+  if (w < 900) return "md";
+  return "lg";
+};
+
 export function useBreakpoint() {
-  const [bp, setBp] = useState("lg");
+  const [bp, setBp] = useState(getBp); // lazy init — no flash on mobile
   useEffect(() => {
-    const update = () => {
-      const w = window.innerWidth;
-      if (w < 480) setBp("xs");
-      else if (w < 640) setBp("sm");
-      else if (w < 900) setBp("md");
-      else setBp("lg");
-    };
-    update();
+    const update = () => setBp(getBp());
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);

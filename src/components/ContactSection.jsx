@@ -3,10 +3,12 @@ import { useBreakpoint } from "../hooks/useBreakpoint";
 import Reveal from "../shared/Reveal";
 import SectionLabel from "../shared/SectionLabel";
 import { PROFILE } from "../data/data";
+import { FONTS, COLORS } from "../data/tokens";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(null);
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const bp = useBreakpoint();
@@ -19,8 +21,23 @@ export default function ContactSection() {
     setTimeout(() => setCopied(null), 2000);
   };
 
+  const validate = () => {
+    const e = {};
+    if (!formState.name.trim()) e.name = "Name is required";
+    if (!formState.email.trim()) {
+      e.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
+      e.email = "Enter a valid email address";
+    }
+    if (!formState.message.trim()) e.message = "Message is required";
+    else if (formState.message.trim().length < 10) e.message = "Message is too short (min 10 chars)";
+    return e;
+  };
+
   const handleSend = () => {
-    if (!formState.name || !formState.email || !formState.message) return;
+    const e = validate();
+    if (Object.keys(e).length > 0) { setErrors(e); return; }
+    setErrors({});
     setSending(true);
     setTimeout(() => {
       setSending(false);
@@ -30,6 +47,12 @@ export default function ContactSection() {
     }, 1200);
   };
 
+  const handleChange = (field, value) => {
+    setFormState((s) => ({ ...s, [field]: value }));
+    // Clear error on change
+    if (errors[field]) setErrors((e) => { const next = { ...e }; delete next[field]; return next; });
+  };
+
   const contacts = [
     { key: "email", icon: "✉", label: "Email", value: PROFILE.email, copyable: true },
     { key: "phone", icon: "✆", label: "Phone", value: PROFILE.phone, copyable: true },
@@ -37,19 +60,30 @@ export default function ContactSection() {
     { key: "location", icon: "◎", label: "Location", value: PROFILE.location, copyable: false },
   ];
 
-  const inputStyle = {
+  const inputBase = {
     width: "100%",
     background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(255,255,255,0.12)",
     borderRadius: 4,
     padding: "12px 14px",
-    fontFamily: "'DM Sans', sans-serif",
+    fontFamily: FONTS.body,
     fontSize: 14,
-    color: "#fff",
+    color: COLORS.white,
     outline: "none",
     transition: "border-color 0.2s",
     boxSizing: "border-box",
   };
+
+  const inputStyle = (field) => ({
+    ...inputBase,
+    border: `1px solid ${errors[field] ? "rgba(239,68,68,0.6)" : COLORS.border}`,
+  });
+
+  const errorMsg = (field) =>
+    errors[field] ? (
+      <span style={{ fontFamily: FONTS.mono, fontSize: 9, color: "rgba(239,68,68,0.9)", marginTop: 4, display: "block", letterSpacing: "0.05em" }}>
+        ✕ {errors[field]}
+      </span>
+    ) : null;
 
   return (
     <section
@@ -137,47 +171,50 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
+                <label style={{ fontFamily: FONTS.mono, fontSize: 9, color: COLORS.textLabel, letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
                   NAME
                 </label>
                 <input
                   value={formState.name}
-                  onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
+                  onChange={(e) => handleChange("name", e.target.value)}
                   placeholder="Your name"
-                  style={inputStyle}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
+                  style={inputStyle("name")}
+                  onFocus={(e) => !errors.name && (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
+                  onBlur={(e) => !errors.name && (e.target.style.borderColor = COLORS.border)}
                 />
+                {errorMsg("name")}
               </div>
 
               <div>
-                <label style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
+                <label style={{ fontFamily: FONTS.mono, fontSize: 9, color: COLORS.textLabel, letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
                   EMAIL
                 </label>
                 <input
                   type="email"
                   value={formState.email}
-                  onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
+                  onChange={(e) => handleChange("email", e.target.value)}
                   placeholder="your@email.com"
-                  style={inputStyle}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
+                  style={inputStyle("email")}
+                  onFocus={(e) => !errors.email && (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
+                  onBlur={(e) => !errors.email && (e.target.style.borderColor = COLORS.border)}
                 />
+                {errorMsg("email")}
               </div>
 
               <div>
-                <label style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
+                <label style={{ fontFamily: FONTS.mono, fontSize: 9, color: COLORS.textLabel, letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
                   MESSAGE
                 </label>
                 <textarea
                   value={formState.message}
-                  onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
+                  onChange={(e) => handleChange("message", e.target.value)}
                   placeholder="What's on your mind?"
                   rows={4}
-                  style={{ ...inputStyle, resize: "vertical", minHeight: 90 }}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.12)")}
+                  style={{ ...inputStyle("message"), resize: "vertical", minHeight: 90 }}
+                  onFocus={(e) => !errors.message && (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
+                  onBlur={(e) => !errors.message && (e.target.style.borderColor = COLORS.border)}
                 />
+                {errorMsg("message")}
               </div>
 
               <button

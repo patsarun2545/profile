@@ -13,7 +13,7 @@ export default function ProjectCard({ project, isMobile }) {
         style={{
           border: `1px solid ${open ? project.color + "50" : "rgba(255,255,255,0.10)"}`,
           background: open
-            ? `rgba(${project.color === "#22c55e" ? "34,197,94" : "134,239,172"},0.04)`
+            ? `rgba(${project.colorRgb},0.04)`
             : "rgba(255,255,255,0.02)",
           padding: isMobile ? "22px 18px" : "36px 40px",
           cursor: "pointer",
