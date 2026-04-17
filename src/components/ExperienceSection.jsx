@@ -1,18 +1,22 @@
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useLang } from "../hooks/useLang";
 import Reveal from "../shared/Reveal";
 import SectionLabel from "../shared/SectionLabel";
-import { EXPERIENCE, EDUCATION } from "../data/data";
 
 export default function ExperienceSection() {
   const bp = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
   const px = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
+  const { t } = useLang();
+
+  const EXPERIENCE = t.data.experience;
+  const EDUCATION  = t.data.education;
 
   return (
     <section id="experience" style={{ padding: `${isMobile ? 80 : 120}px ${px}` }}>
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <Reveal>
-          <SectionLabel number="04" title="Experience" isMobile={isMobile} />
+          <SectionLabel number="04" title={t.sections.experience} isMobile={isMobile} />
         </Reveal>
         <div style={{ marginTop: isMobile ? 32 : 52, display: "flex", flexDirection: "column", gap: 28 }}>
 
@@ -20,7 +24,7 @@ export default function ExperienceSection() {
           <div>
             <Reveal delay={0.05}>
               <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.15em", marginBottom: 12 }}>
-                WORK EXPERIENCE
+                {t.experience.workLabel}
               </div>
             </Reveal>
             {EXPERIENCE.map((exp, i) => (
@@ -88,7 +92,7 @@ export default function ExperienceSection() {
           <div>
             <Reveal delay={0.05}>
               <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: "0.15em", marginBottom: 12 }}>
-                EDUCATION
+                {t.experience.educationLabel}
               </div>
             </Reveal>
             <Reveal delay={0.15}>

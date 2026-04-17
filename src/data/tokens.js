@@ -9,7 +9,6 @@ export const COLORS = {
   greenRgb: "34,197,94",
   bg: "#1a1a1a",
   white: "#fff",
-  // Opacity helpers
   green10: "rgba(34,197,94,0.10)",
   green08: "rgba(34,197,94,0.08)",
   green05: "rgba(34,197,94,0.05)",
@@ -24,7 +23,6 @@ export const COLORS = {
   textLabel: "rgba(255,255,255,0.4)",
 };
 
-// Reusable style objects
 export const CARD_BASE = {
   border: `1px solid ${COLORS.border}`,
   borderRadius: 4,

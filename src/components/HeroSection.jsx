@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useLang } from "../hooks/useLang";
 import TypingText from "../shared/TypingText";
 import AnimatedNumber from "../shared/AnimatedNumber";
-import { PROFILE } from "../data/data";
 
 export default function HeroSection() {
   const [show, setShow] = useState(false);
   const bp = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
   const isTablet = bp === "md";
+  const { t } = useLang();
 
   useEffect(() => {
     setTimeout(() => setShow(true), 80);
@@ -65,7 +66,7 @@ export default function HeroSection() {
         <div style={{ ...fadeUp(0.1), display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
           <div style={{ width: 24, height: 1, background: "#22c55e", flexShrink: 0 }} />
           <span style={{ fontFamily: "'Fira Code', monospace", fontSize: isMobile ? 10 : 12, color: "#22c55e", letterSpacing: "0.15em" }}>
-            HELLO, I'M
+            {t.hero.hello}
           </span>
         </div>
 
@@ -102,7 +103,8 @@ export default function HeroSection() {
         >
           <span style={{ color: "rgba(34,197,94,0.45)" }}>$ </span>
           <TypingText
-            words={["Full Stack Developer", "PERN Stack Engineer", "MERN Stack Builder", "API & Auth Specialist"]}
+            key={t.hero.typingWords[0]}
+            words={t.hero.typingWords}
             speed={70}
             pause={2000}
           />
@@ -122,7 +124,7 @@ export default function HeroSection() {
               borderRadius: 2,
             }}
           >
-            Full Stack Developer
+            {t.hero.badge}
           </div>
           {["PERN", "MERN"].map((s) => (
             <span
@@ -153,7 +155,7 @@ export default function HeroSection() {
             color: "rgba(255,255,255,0.7)",
           }}
         >
-          {PROFILE.bio}
+          {t.hero.bio}
         </p>
 
         {/* CTAs */}
@@ -173,10 +175,10 @@ export default function HeroSection() {
               borderRadius: 2,
             }}
           >
-            View Projects →
+            {t.hero.cta1}
           </a>
           <a
-            href={`mailto:${PROFILE.email}`}
+            href="#contact"
             style={{
               padding: isMobile ? "11px 22px" : "13px 28px",
               border: "1px solid rgba(34,197,94,0.3)",
@@ -189,7 +191,7 @@ export default function HeroSection() {
               transition: "all 0.2s",
             }}
           >
-            Get in Touch
+            {t.hero.cta2}
           </a>
         </div>
 
@@ -206,9 +208,9 @@ export default function HeroSection() {
           }}
         >
           {[
-            { val: 4, suffix: "Projects", label: "Completed" },
-            { val: 4, suffix: "Stacks", label: "Tech Mastered" },
-            { val: 1, suffix: "Internship", label: "Experience" },
+            { val: 4, suffix: t.hero.stats[0].suffix, label: t.hero.stats[0].label },
+            { val: 4, suffix: t.hero.stats[1].suffix, label: t.hero.stats[1].label },
+            { val: 1, suffix: t.hero.stats[2].suffix, label: t.hero.stats[2].label },
           ].map((s, i) => (
             <div
               key={i}
@@ -222,11 +224,11 @@ export default function HeroSection() {
                 paddingBottom: i < 2 && isMobile ? 24 : 0,
               }}
             >
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: isMobile ? 22 : 30, fontWeight: 800, color: "#22c55e" }}>
-              <AnimatedNumber value={s.val} />
-              <br />
-              <span>{s.suffix}</span>
-            </div>
+              <div style={{ fontFamily: "'Syne', sans-serif", fontSize: isMobile ? 22 : 30, fontWeight: 800, color: "#22c55e" }}>
+                <AnimatedNumber value={s.val} />
+                <br />
+                <span>{s.suffix}</span>
+              </div>
               <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 9, color: "rgba(255,255,255,0.5)", marginTop: 4, letterSpacing: "0.1em" }}>
                 {s.label}
               </div>

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useLang } from "../hooks/useLang";
 import Lightbox from "./Lightbox";
 
 export default function ProjectCard({ project, isMobile }) {
   const [open, setOpen] = useState(true);
   const [lightbox, setLightbox] = useState(null);
   const hasImages = project.screens && project.screens.length > 0;
+  const { t } = useLang();
 
   return (
     <>
@@ -86,9 +88,9 @@ export default function ProjectCard({ project, isMobile }) {
 
         {/* Tags */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 14 }}>
-          {project.tags.map((t) => (
+          {project.tags.map((tag) => (
             <span
-              key={t}
+              key={tag}
               style={{
                 fontFamily: "'Fira Code', monospace",
                 fontSize: isMobile ? 9 : 10,
@@ -98,18 +100,49 @@ export default function ProjectCard({ project, isMobile }) {
                 borderRadius: 2,
               }}
             >
-              {t}
+              {tag}
             </span>
           ))}
         </div>
 
-        {/* Demo links */}
-        {project.url && (
+        {/* Demo + repo links */}
+        {(project.url || project.repo) && (
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {(Array.isArray(project.url) ? project.url : [project.url]).map((href, i) => (
+            {project.url &&
+              (Array.isArray(project.url) ? project.url : [project.url]).map((href, i) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                    padding: "6px 14px",
+                    background: project.color + "15",
+                    border: `1px solid ${project.color}40`,
+                    color: project.color,
+                    fontFamily: "'Fira Code', monospace",
+                    fontSize: 10,
+                    letterSpacing: "0.08em",
+                    textDecoration: "none",
+                    borderRadius: 2,
+                    transition: "all 0.2s",
+                  }}
+                >
+                  ↗{" "}
+                  {Array.isArray(project.url)
+                    ? i === 0
+                      ? t.projects.userDemo
+                      : t.projects.adminDemo
+                    : t.projects.liveDemo}
+                </a>
+              ))}
+            {project.repo && (
               <a
-                key={href}
-                href={href}
+                href={project.repo}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
@@ -118,9 +151,9 @@ export default function ProjectCard({ project, isMobile }) {
                   alignItems: "center",
                   gap: 6,
                   padding: "6px 14px",
-                  background: project.color + "15",
-                  border: `1px solid ${project.color}40`,
-                  color: project.color,
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  color: "rgba(255,255,255,0.55)",
                   fontFamily: "'Fira Code', monospace",
                   fontSize: 10,
                   letterSpacing: "0.08em",
@@ -128,10 +161,18 @@ export default function ProjectCard({ project, isMobile }) {
                   borderRadius: 2,
                   transition: "all 0.2s",
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                }}
               >
-                ↗ {Array.isArray(project.url) ? (i === 0 ? "User Demo" : "Admin Demo") : "Live Demo"}
+                ⌥ {t.projects.viewCode}
               </a>
-            ))}
+            )}
           </div>
         )}
 
@@ -143,7 +184,10 @@ export default function ProjectCard({ project, isMobile }) {
               {project.screens.map((img, i) => (
                 <div
                   key={i}
-                  onClick={(e) => { e.stopPropagation(); setLightbox(i); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightbox(i);
+                  }}
                   style={{
                     position: "relative",
                     flexShrink: 0,

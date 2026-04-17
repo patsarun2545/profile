@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
-import Reveal from "../shared/Reveal";
+import { useLang } from "../hooks/useLang";import Reveal from "../shared/Reveal";
 import SectionLabel from "../shared/SectionLabel";
 import { PROFILE } from "../data/data";
 import { FONTS, COLORS } from "../data/tokens";
@@ -18,6 +18,8 @@ export default function ContactSection() {
   const bp       = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
   const px       = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
+  const { t }    = useLang();
+  const ct       = t.contact;
 
   const copy = (text, key) => {
     navigator.clipboard.writeText(text);
@@ -27,14 +29,14 @@ export default function ContactSection() {
 
   const validate = () => {
     const e = {};
-    if (!formState.name.trim()) e.name = "Name is required";
+    if (!formState.name.trim())    e.name    = ct.errors?.nameRequired    ?? "Name is required";
     if (!formState.email.trim()) {
-      e.email = "Email is required";
+      e.email = ct.errors?.emailRequired ?? "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
-      e.email = "Enter a valid email address";
+      e.email = ct.errors?.emailInvalid ?? "Enter a valid email address";
     }
-    if (!formState.message.trim()) e.message = "Message is required";
-    else if (formState.message.trim().length < 10) e.message = "Message is too short (min 10 chars)";
+    if (!formState.message.trim())                      e.message = ct.errors?.messageRequired ?? "Message is required";
+    else if (formState.message.trim().length < 10)      e.message = ct.errors?.messageTooShort ?? "Message is too short";
     return e;
   };
 
@@ -50,11 +52,7 @@ export default function ContactSection() {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        {
-          from_name:  formState.name,
-          from_email: formState.email,
-          message:    formState.message,
-        },
+        { from_name: formState.name, from_email: formState.email, message: formState.message },
         EMAILJS_PUBLIC_KEY
       );
       setSent(true);
@@ -75,10 +73,10 @@ export default function ContactSection() {
   };
 
   const contacts = [
-    { key: "email",    icon: "✉", label: "Email",    value: PROFILE.email,    copyable: true  },
-    { key: "phone",    icon: "✆", label: "Phone",    value: PROFILE.phone,    copyable: true  },
-    { key: "github",   icon: "⌥", label: "GitHub",   value: PROFILE.github,   copyable: false },
-    { key: "location", icon: "◎", label: "Location", value: PROFILE.location, copyable: false },
+    { key: "email",    icon: "✉", label: ct.labels.email,    value: PROFILE.email,              copyable: true,  href: null },
+    { key: "phone",    icon: "✆", label: ct.labels.phone,    value: PROFILE.phone,              copyable: true,  href: null },
+    { key: "github",   icon: "⌥", label: ct.labels.github,   value: PROFILE.github,             copyable: false, href: `https://${PROFILE.github}` },
+    { key: "location", icon: "◎", label: ct.labels.location, value: t.data.profile?.location ?? PROFILE.location, copyable: false, href: null },
   ];
 
   const inputBase = {
@@ -116,7 +114,7 @@ export default function ContactSection() {
     >
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <Reveal>
-          <SectionLabel number="05" title="Contact" isMobile={isMobile} />
+          <SectionLabel number="05" title={t.sections.contact} isMobile={isMobile} />
         </Reveal>
 
         <div
@@ -131,15 +129,30 @@ export default function ContactSection() {
           {/* LEFT — contact info */}
           <div>
             <Reveal delay={0.05}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 14px", background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: 20, marginBottom: 16 }}>
+                <span style={{ position: "relative", display: "inline-flex", alignItems: "center", justifyContent: "center", width: 8, height: 8 }}>
+                  <span style={{ position: "absolute", width: 14, height: 14, borderRadius: "50%", background: "rgba(34,197,94,0.25)", animation: "ping 1.5s cubic-bezier(0,0,0.2,1) infinite" }} />
+                  <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", flexShrink: 0, position: "relative" }} />
+                </span>
+                <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 11, color: "#22c55e", letterSpacing: "0.05em" }}>
+                  {ct.availableBadge}
+                </span>
+              </div>
+              <style>{`@keyframes ping { 75%,100% { transform: scale(2); opacity: 0; } }`}</style>
+            </Reveal>
+            <Reveal delay={0.08}>
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: isMobile ? 14 : 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.75, margin: "0 0 24px" }}>
-                Currently looking for new opportunities — whether it's a full-time role, freelance project, or just a chat about tech. My inbox is always open.
+                {ct.description}
               </p>
             </Reveal>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {contacts.map((c, i) => (
                 <Reveal key={c.key} delay={0.08 + i * 0.07}>
                   <div
-                    onClick={() => c.copyable && copy(c.value, c.key)}
+                    onClick={() => {
+                      if (c.href) window.open(c.href, "_blank", "noopener,noreferrer");
+                      else if (c.copyable) copy(c.value, c.key);
+                    }}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -147,7 +160,7 @@ export default function ContactSection() {
                       padding: "14px 16px",
                       border: `1px solid ${copied === c.key ? "rgba(34,197,94,0.3)" : "rgba(255,255,255,0.10)"}`,
                       borderRadius: 4,
-                      cursor: c.copyable ? "pointer" : "default",
+                      cursor: c.copyable || c.href ? "pointer" : "default",
                       transition: "all 0.2s",
                       background: copied === c.key ? "rgba(34,197,94,0.08)" : "rgba(255,255,255,0.02)",
                     }}
@@ -160,12 +173,12 @@ export default function ContactSection() {
                         {c.label}
                       </div>
                       <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: isMobile ? 12 : 13, color: "rgba(255,255,255,0.7)", wordBreak: "break-all" }}>
-                        {copied === c.key ? "✓ Copied!" : c.value}
+                        {copied === c.key ? ct.copied : c.value}
                       </div>
                     </div>
                     {c.copyable && (
                       <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 8, color: "rgba(255,255,255,0.3)", flexShrink: 0 }}>
-                        copy
+                        {ct.copyHint}
                       </span>
                     )}
                   </div>
@@ -188,52 +201,52 @@ export default function ContactSection() {
               }}
             >
               <div style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: "rgba(34,197,94,0.6)", letterSpacing: "0.15em", marginBottom: 2 }}>
-                // send a message
+                {ct.formComment}
               </div>
 
               <div>
                 <label style={{ fontFamily: FONTS.mono, fontSize: 9, color: COLORS.textLabel, letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
-                  NAME
+                  {ct.nameLabel}
                 </label>
                 <input
                   value={formState.name}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  placeholder="Your name"
+                  placeholder={ct.namePlaceholder}
                   style={inputStyle("name")}
                   onFocus={(e) => !errors.name && (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
-                  onBlur={(e) => !errors.name && (e.target.style.borderColor = COLORS.border)}
+                  onBlur={(e)  => !errors.name && (e.target.style.borderColor = COLORS.border)}
                 />
                 {errorMsg("name")}
               </div>
 
               <div>
                 <label style={{ fontFamily: FONTS.mono, fontSize: 9, color: COLORS.textLabel, letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
-                  EMAIL
+                  {ct.emailLabel}
                 </label>
                 <input
                   type="email"
                   value={formState.email}
                   onChange={(e) => handleChange("email", e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={ct.emailPlaceholder}
                   style={inputStyle("email")}
                   onFocus={(e) => !errors.email && (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
-                  onBlur={(e) => !errors.email && (e.target.style.borderColor = COLORS.border)}
+                  onBlur={(e)  => !errors.email && (e.target.style.borderColor = COLORS.border)}
                 />
                 {errorMsg("email")}
               </div>
 
               <div>
                 <label style={{ fontFamily: FONTS.mono, fontSize: 9, color: COLORS.textLabel, letterSpacing: "0.12em", display: "block", marginBottom: 6 }}>
-                  MESSAGE
+                  {ct.messageLabel}
                 </label>
                 <textarea
                   value={formState.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  placeholder="What's on your mind?"
+                  placeholder={ct.messagePlaceholder}
                   rows={4}
                   style={{ ...inputStyle("message"), resize: "vertical", minHeight: 90 }}
                   onFocus={(e) => !errors.message && (e.target.style.borderColor = "rgba(34,197,94,0.4)")}
-                  onBlur={(e) => !errors.message && (e.target.style.borderColor = COLORS.border)}
+                  onBlur={(e)  => !errors.message && (e.target.style.borderColor = COLORS.border)}
                 />
                 {errorMsg("message")}
               </div>
@@ -262,7 +275,7 @@ export default function ContactSection() {
                   opacity: sending ? 0.7 : 1,
                 }}
               >
-                {sent ? "✓ Message Sent!" : sending ? "sending..." : "Send Message →"}
+                {sent ? ct.sentBtn : sending ? ct.sendingBtn : ct.sendBtn}
               </button>
             </div>
           </Reveal>

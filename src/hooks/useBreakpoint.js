@@ -10,7 +10,7 @@ const getBp = () => {
 };
 
 export function useBreakpoint() {
-  const [bp, setBp] = useState(getBp); // lazy init — no flash on mobile
+  const [bp, setBp] = useState(getBp);
   useEffect(() => {
     const update = () => setBp(getBp());
     window.addEventListener("resize", update);

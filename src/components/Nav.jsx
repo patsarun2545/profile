@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useLang } from "../hooks/useLang";
 
 export default function Nav({ active }) {
   const bp = useBreakpoint();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = bp === "xs" || bp === "sm";
+  const { lang, toggle, t } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -14,11 +16,11 @@ export default function Nav({ active }) {
   }, []);
 
   const links = [
-    { id: "about", label: "About" },
-    { id: "projects", label: "Projects" },
-    { id: "skills", label: "Skills" },
-    { id: "experience", label: "Experience" },
-    { id: "contact", label: "Contact" },
+    { id: "about",      label: t.nav.about },
+    { id: "projects",   label: t.nav.projects },
+    { id: "skills",     label: t.nav.skills },
+    { id: "experience", label: t.nav.experience },
+    { id: "contact",    label: t.nav.contact },
   ];
 
   return (
@@ -41,6 +43,7 @@ export default function Nav({ active }) {
           transition: "all 0.3s",
         }}
       >
+        {/* Logo */}
         <div
           style={{
             fontFamily: "'Fira Code', monospace",
@@ -56,8 +59,9 @@ export default function Nav({ active }) {
           <span style={{ opacity: 0.5 }}>{"/>"}</span>
         </div>
 
+        {/* Desktop links + toggle */}
         {!isMobile && (
-          <div style={{ display: "flex", gap: 2 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
             {links.map((l) => (
               <a
                 key={l.id}
@@ -77,30 +81,80 @@ export default function Nav({ active }) {
                 {l.label}
               </a>
             ))}
+
+            {/* Language toggle button */}
+            <button
+              onClick={toggle}
+              style={{
+                marginLeft: 10,
+                padding: "5px 12px",
+                fontFamily: "'Fira Code', monospace",
+                fontSize: 11,
+                color: "#22c55e",
+                background: "rgba(34,197,94,0.08)",
+                border: "1px solid rgba(34,197,94,0.30)",
+                borderRadius: 4,
+                cursor: "pointer",
+                letterSpacing: "0.08em",
+                fontWeight: 700,
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "rgba(34,197,94,0.18)";
+                e.currentTarget.style.borderColor = "rgba(34,197,94,0.6)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "rgba(34,197,94,0.08)";
+                e.currentTarget.style.borderColor = "rgba(34,197,94,0.30)";
+              }}
+            >
+              {lang === "en" ? "TH" : "EN"}
+            </button>
           </div>
         )}
 
+        {/* Mobile: lang toggle + hamburger */}
         {isMobile && (
-          <button
-            onClick={() => setMenuOpen((o) => !o)}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 8,
-              display: "flex",
-              flexDirection: "column",
-              gap: 5,
-              alignItems: "flex-end",
-            }}
-          >
-            <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: 22, transition: "all 0.25s", transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
-            <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: 16, transition: "all 0.25s", opacity: menuOpen ? 0 : 1 }} />
-            <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: menuOpen ? 22 : 12, transition: "all 0.25s", transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <button
+              onClick={toggle}
+              style={{
+                padding: "4px 10px",
+                fontFamily: "'Fira Code', monospace",
+                fontSize: 10,
+                color: "#22c55e",
+                background: "rgba(34,197,94,0.08)",
+                border: "1px solid rgba(34,197,94,0.30)",
+                borderRadius: 4,
+                cursor: "pointer",
+                letterSpacing: "0.05em",
+                fontWeight: 700,
+              }}
+            >
+              {lang === "en" ? "TH" : "EN"}
+            </button>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 8,
+                display: "flex",
+                flexDirection: "column",
+                gap: 5,
+                alignItems: "flex-end",
+              }}
+            >
+              <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: 22, transition: "all 0.25s", transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
+              <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: 16, transition: "all 0.25s", opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: menuOpen ? 22 : 12, transition: "all 0.25s", transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
+            </button>
+          </div>
         )}
       </nav>
 
+      {/* Mobile menu */}
       {isMobile && (
         <div
           style={{

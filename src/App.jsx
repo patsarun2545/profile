@@ -7,36 +7,46 @@ import SkillsSection from "./components/SkillsSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import { LangProvider } from "./context/LangProvider";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
     const sections = ["about", "projects", "skills", "experience", "contact"];
-    const observers = sections.map((id) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
-        { threshold: 0.3 },
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
+
+    const onScroll = () => {
+      const scrollY = window.scrollY + window.innerHeight * 0.4;
+      let current = "about";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
     <>
-      <Nav active={activeSection} />
-      <main style={{ background: "#1a1a1a" }}>
-        <HeroSection />
-        <ProjectsSection />
-        <SkillsSection />
-        <ExperienceSection />
-        <ContactSection />
-      </main>
-      <Footer />
+      <LangProvider>
+        <Nav active={activeSection} />
+        <main style={{ background: "#1a1a1a" }}>
+          <HeroSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <ExperienceSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </LangProvider>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useLang } from "../hooks/useLang";
 import Reveal from "../shared/Reveal";
 import SectionLabel from "../shared/SectionLabel";
 import { SKILLS } from "../data/data";
@@ -7,6 +8,7 @@ export default function SkillsSection() {
   const bp = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
   const px = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
+  const { t } = useLang();
   const cats = Object.keys(SKILLS);
 
   return (
@@ -21,7 +23,7 @@ export default function SkillsSection() {
     >
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <Reveal>
-          <SectionLabel number="03" title="Skills" isMobile={isMobile} />
+          <SectionLabel number="03" title={t.sections.skills} isMobile={isMobile} />
         </Reveal>
         <div style={{ marginTop: isMobile ? 32 : 52, display: "flex", flexDirection: "column", gap: 20 }}>
           {cats.map((cat, catIdx) => (

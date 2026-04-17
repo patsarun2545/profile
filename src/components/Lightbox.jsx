@@ -4,7 +4,6 @@ export default function Lightbox({ images, initialIndex, onClose }) {
   const [idx, setIdx] = useState(initialIndex);
   const [animDir, setAnimDir] = useState(null);
 
-  // Fix 7: lock body scroll while lightbox is open
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";

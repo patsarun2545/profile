@@ -6,13 +6,11 @@ export default function TypingText({ words, speed = 80, pause = 1800 }) {
   const [deleting, setDeleting] = useState(false);
   const [blink, setBlink] = useState(true);
 
-  // cursor blink
   useEffect(() => {
     const blinkInterval = setInterval(() => setBlink((b) => !b), 530);
     return () => clearInterval(blinkInterval);
   }, []);
 
-  // typing logic
   useEffect(() => {
     const current = words[wordIdx];
     let timeout;
@@ -33,7 +31,6 @@ export default function TypingText({ words, speed = 80, pause = 1800 }) {
           setDisplayed(displayed.slice(0, -1));
         }, speed / 2);
       } else {
-        // ✅ FIX: wrap ใน timeout
         timeout = setTimeout(() => {
           setDeleting(false);
           setWordIdx((i) => (i + 1) % words.length);

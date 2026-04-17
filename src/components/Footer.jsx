@@ -1,8 +1,11 @@
 import { useBreakpoint } from "../hooks/useBreakpoint";
+import { useLang } from "../hooks/useLang";
 
 export default function Footer() {
   const bp = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
+  const { t } = useLang();
+
   return (
     <footer
       style={{
@@ -17,10 +20,10 @@ export default function Footer() {
       }}
     >
       <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: "rgba(255,255,255,0.35)" }}>
-        © 2025 Patsarun Kathinthong
+        © {new Date().getFullYear()} Patsarun Kathinthong
       </span>
       <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: "rgba(255,255,255,0.3)" }}>
-        Full Stack Developer · PERN · MERN
+        {t.footer.role}
       </span>
     </footer>
   );
