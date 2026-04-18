@@ -9,7 +9,6 @@ export default function SkillsSection() {
   const isMobile = bp === "xs" || bp === "sm";
   const px = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
   const { t } = useLang();
-  const cats = Object.keys(SKILLS);
 
   return (
     <section
@@ -23,11 +22,22 @@ export default function SkillsSection() {
     >
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <Reveal>
-          <SectionLabel number="03" title={t.sections.skills} isMobile={isMobile} />
+          <SectionLabel
+            number="03"
+            title={t.sections.skills}
+            isMobile={isMobile}
+          />
         </Reveal>
-        <div style={{ marginTop: isMobile ? 32 : 52, display: "flex", flexDirection: "column", gap: 20 }}>
-          {cats.map((cat, catIdx) => (
-            <Reveal key={cat} delay={0.08 + catIdx * 0.1}>
+        <div
+          style={{
+            marginTop: isMobile ? 32 : 52,
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+          }}
+        >
+          {SKILLS.map((cat, catIdx) => (
+            <Reveal key={cat.key} delay={0.08 + catIdx * 0.1}>
               <div
                 style={{
                   border: "1px solid rgba(255,255,255,0.10)",
@@ -46,13 +56,35 @@ export default function SkillsSection() {
                     gap: 8,
                   }}
                 >
-                  <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#22c55e", flexShrink: 0 }} />
-                  <span style={{ fontFamily: "'Fira Code', monospace", fontSize: isMobile ? 10 : 11, color: "#22c55e", letterSpacing: "0.1em" }}>
-                    {cat}
+                  <div
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: "#22c55e",
+                      flexShrink: 0,
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "'Fira Code', monospace",
+                      fontSize: isMobile ? 10 : 11,
+                      color: "#22c55e",
+                      letterSpacing: "0.1em",
+                    }}
+                  >
+                    {t.skillCategories[cat.key]}
                   </span>
                 </div>
-                <div style={{ padding: isMobile ? "14px" : "18px 20px", display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {SKILLS[cat].map((skill, i) => (
+                <div
+                  style={{
+                    padding: isMobile ? "14px" : "18px 20px",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 8,
+                  }}
+                >
+                  {cat.items.map((skill, i) => (
                     <div
                       key={skill}
                       style={{

@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
+import { useLang } from "../hooks/useLang";
 
 export default function Lightbox({ images, initialIndex, onClose }) {
   const [idx, setIdx] = useState(initialIndex);
   const [animDir, setAnimDir] = useState(null);
+  const { t } = useLang();
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -73,7 +75,7 @@ export default function Lightbox({ images, initialIndex, onClose }) {
             letterSpacing: "0.05em",
           }}
         >
-          [ ESC ] close
+          {t.lightbox.close}
         </button>
 
         <div

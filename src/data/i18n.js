@@ -10,35 +10,40 @@ export const translations = {
 
     hero: {
       hello: "HELLO, I'M",
-      typingWords: ["Full Stack Developer", "PERN Stack Engineer", "MERN Stack Builder", "API & Auth Specialist"],
+      typingWords: [
+        "Full Stack Developer",
+        "PERN Stack Engineer",
+        "MERN Stack Builder",
+        "API & Auth Specialist",
+      ],
       badge: "Full Stack Developer",
       bio: "Full Stack Developer specializing in PERN/MERN Stack (PostgreSQL, MongoDB, Express.js, React.js/Next.js, Node.js). Experienced in developing secure RESTful APIs, JWT authentication, RBAC authorization, and relational database design. Strong understanding of clean architecture, performance optimization, and deployment on Ubuntu Linux. Passionate about building scalable systems and improving software quality.",
       cta1: "View Projects →",
       cta2: "Get in Touch",
       stats: [
         { suffix: "Projects", label: "Completed" },
-        { suffix: "Stacks",   label: "Tech Mastered" },
+        { suffix: "Stacks", label: "Tech Mastered" },
         { suffix: "Internship", label: "Experience" },
       ],
     },
 
     sections: {
-      projects:   "Projects",
-      skills:     "Skills",
+      projects: "Projects",
+      skills: "Skills",
       experience: "Experience",
-      contact:    "Contact",
+      contact: "Contact",
     },
 
     projects: {
-      hint:      "// tap card to expand · click image to zoom",
-      liveDemo:  "Live Demo",
-      userDemo:  "User Demo",
+      hint: "// tap card to expand · click image to zoom",
+      liveDemo: "Live Demo",
+      userDemo: "User Demo",
       adminDemo: "Admin Demo",
-      viewCode:  "View Code",
+      viewCode: "View Code",
     },
 
     experience: {
-      workLabel:      "WORK EXPERIENCE",
+      workLabel: "WORK EXPERIENCE",
       educationLabel: "EDUCATION",
     },
 
@@ -47,27 +52,27 @@ export const translations = {
       description:
         "Currently looking for new opportunities — whether it's a full-time role, freelance project, or just a chat about tech. My inbox is always open.",
       labels: {
-        email:    "Email",
-        phone:    "Phone",
-        github:   "GitHub",
+        email: "Email",
+        phone: "Phone",
+        github: "GitHub",
         location: "Location",
       },
-      formComment:        "// send a message",
-      nameLabel:          "NAME",
-      emailLabel:         "EMAIL",
-      messageLabel:       "MESSAGE",
-      namePlaceholder:    "Your name",
-      emailPlaceholder:   "your@email.com",
+      formComment: "// send a message",
+      nameLabel: "NAME",
+      emailLabel: "EMAIL",
+      messageLabel: "MESSAGE",
+      namePlaceholder: "Your name",
+      emailPlaceholder: "your@email.com",
       messagePlaceholder: "What's on your mind?",
-      sendBtn:    "Send Message →",
+      sendBtn: "Send Message →",
       sendingBtn: "sending...",
-      sentBtn:    "✓ Message Sent!",
-      copyHint:   "copy",
-      copied:     "✓ Copied!",
+      sentBtn: "✓ Message Sent!",
+      copyHint: "copy",
+      copied: "✓ Copied!",
       errors: {
-        nameRequired:    "Name is required",
-        emailRequired:   "Email is required",
-        emailInvalid:    "Enter a valid email address",
+        nameRequired: "Name is required",
+        emailRequired: "Email is required",
+        emailInvalid: "Enter a valid email address",
         messageRequired: "Message is required",
         messageTooShort: "Message is too short (min 10 chars)",
       },
@@ -83,9 +88,9 @@ export const translations = {
       },
       experience: [
         {
-          role:    "IT Support Intern",
+          role: "IT Support Intern",
           company: "NAGA METAL SHEET CO.",
-          period:  "Mar 2024 – Jun 2024",
+          period: "Mar 2024 – Jun 2024",
           bullets: [
             "Installed and configured engineering/design software for internal workflows",
             "Created structured documentation and user guides for operational efficiency",
@@ -95,14 +100,14 @@ export const translations = {
         },
       ],
       education: {
-        degree:     "Business Computer",
+        degree: "Business Computer",
         university: "Mahasarakham University",
-        period:     "Jun 2021 – May 2025",
+        period: "Jun 2021 – May 2025",
       },
       projects: [
         {
-          id:       1,
-          period:   "Mar 2026",
+          id: 1,
+          period: "Mar 2026",
           subtitle: "Fullstack E-Commerce with Admin Dashboard & Payment Flow",
           bullets: [
             "Built fullstack e-commerce system using Next.js App Router (Server Actions + Route Handlers)",
@@ -118,8 +123,8 @@ export const translations = {
           ],
         },
         {
-          id:       2,
-          period:   "Feb 2026",
+          id: 2,
+          period: "Feb 2026",
           subtitle: "Advanced Rental Workflow & Admin Management System",
           bullets: [
             "Built a dedicated Admin Panel for managing the full rental lifecycle from booking to completion",
@@ -134,9 +139,10 @@ export const translations = {
           ],
         },
         {
-          id:       3,
-          period:   "Dec 2024 – Feb 2025",
-          subtitle: "Graduation Project Dual-App Rental Platform (Customer & Back Office)",
+          id: 3,
+          period: "Dec 2024 – Feb 2025",
+          subtitle:
+            "Graduation Project Dual-App Rental Platform (Customer & Back Office)",
           bullets: [
             "Dual-frontend architecture: Customer App + Admin Panel, each with independent role-based access (owner / user) via JWT middleware",
             "PostgreSQL schema supporting full rental lifecycle: PENDING → CONFIRMED → ACTIVE → RETURNED → COMPLETED",
@@ -149,8 +155,8 @@ export const translations = {
           ],
         },
         {
-          id:       4,
-          period:   "Jul 2024 – Oct 2024",
+          id: 4,
+          period: "Jul 2024 – Oct 2024",
           subtitle: "Inventory & Sales Management System with Repair Module",
           bullets: [
             "Built with Next.js 14 (App Router), TypeScript, and Tailwind CSS for a responsive store management experience",
@@ -165,48 +171,65 @@ export const translations = {
         },
       ],
     },
+
+    lightbox: {
+      close: "[ ESC ] close",
+      zoom: "⊕ zoom",
+    },
+
+    skillCategories: {
+      languages: "Languages",
+      frameworks: "Frameworks & Libs",
+      databases: "Databases",
+      tools: "Tools & Platforms",
+    },
   },
 
   th: {
     nav: {
-      about:      "เกี่ยวกับ",
-      projects:   "โปรเจกต์",
-      skills:     "ทักษะ",
+      about: "เกี่ยวกับ",
+      projects: "โปรเจกต์",
+      skills: "ทักษะ",
       experience: "ประสบการณ์",
-      contact:    "ติดต่อ",
+      contact: "ติดต่อ",
     },
 
     hero: {
       hello: "สวัสดี, ฉันคือ",
-      typingWords: ["นักพัฒนา Full Stack", "วิศวกร PERN Stack", "ผู้สร้าง MERN Stack", "ผู้เชี่ยวชาญ API & Auth"],
+      typingWords: [
+        "นักพัฒนา Full Stack",
+        "วิศวกร PERN Stack",
+        "ผู้สร้าง MERN Stack",
+        "ผู้เชี่ยวชาญ API & Auth",
+      ],
       badge: "นักพัฒนา Full Stack",
       bio: "นักพัฒนา Full Stack ที่เชี่ยวชาญด้าน PERN/MERN Stack (PostgreSQL, MongoDB, Express.js, React.js/Next.js, Node.js) มีประสบการณ์พัฒนา RESTful API ที่ปลอดภัย, JWT authentication, RBAC authorization และการออกแบบฐานข้อมูลเชิงสัมพันธ์ มีความเข้าใจด้าน Clean Architecture, การปรับปรุงประสิทธิภาพ และการ Deploy บน Ubuntu Linux มุ่งมั่นสร้างระบบที่ Scalable และพัฒนาคุณภาพซอฟต์แวร์อย่างต่อเนื่อง",
       cta1: "ดูโปรเจกต์ →",
       cta2: "ติดต่อฉัน",
       stats: [
-        { suffix: "โปรเจกต์",  label: "ที่เสร็จสิ้น" },
-        { suffix: "Stacks",     label: "ที่เชี่ยวชาญ" },
-        { suffix: "ฝึกงาน",   label: "ประสบการณ์" },
+        { suffix: "โปรเจกต์", label: "ที่เสร็จสิ้น" },
+        { suffix: "Stacks", label: "ที่เชี่ยวชาญ" },
+        { suffix: "ฝึกงาน", label: "ประสบการณ์" },
       ],
     },
 
     sections: {
-      projects:   "โปรเจกต์",
-      skills:     "ทักษะ",
+      projects: "โปรเจกต์",
+      skills: "ทักษะ",
       experience: "ประสบการณ์",
-      contact:    "ติดต่อ",
+      contact: "ติดต่อ",
     },
 
     projects: {
-      hint:      "// แตะการ์ดเพื่อขยาย · คลิกภาพเพื่อซูม",
-      liveDemo:  "ดูตัวอย่าง",
-      userDemo:  "ตัวอย่าง User",
+      hint: "// แตะการ์ดเพื่อขยาย · คลิกภาพเพื่อซูม",
+      liveDemo: "ดูตัวอย่าง",
+      userDemo: "ตัวอย่าง User",
       adminDemo: "ตัวอย่าง Admin",
-      viewCode:  "ดูโค้ด",
+      viewCode: "ดูโค้ด",
     },
 
     experience: {
-      workLabel:      "ประสบการณ์ทำงาน",
+      workLabel: "ประสบการณ์ทำงาน",
       educationLabel: "การศึกษา",
     },
 
@@ -215,27 +238,27 @@ export const translations = {
       description:
         "กำลังมองหาโอกาสใหม่ๆ ไม่ว่าจะเป็นงานประจำ, โปรเจกต์ Freelance หรือแค่อยากคุยเรื่องเทคโนโลยี กล่องข้อความเปิดรับเสมอ",
       labels: {
-        email:    "อีเมล",
-        phone:    "โทรศัพท์",
-        github:   "GitHub",
+        email: "อีเมล",
+        phone: "โทรศัพท์",
+        github: "GitHub",
         location: "ที่อยู่",
       },
-      formComment:        "// ส่งข้อความหาฉัน",
-      nameLabel:          "ชื่อ",
-      emailLabel:         "อีเมล",
-      messageLabel:       "ข้อความ",
-      namePlaceholder:    "ชื่อของคุณ",
-      emailPlaceholder:   "อีเมลของคุณ",
+      formComment: "// ส่งข้อความหาฉัน",
+      nameLabel: "ชื่อ",
+      emailLabel: "อีเมล",
+      messageLabel: "ข้อความ",
+      namePlaceholder: "ชื่อของคุณ",
+      emailPlaceholder: "อีเมลของคุณ",
       messagePlaceholder: "มีอะไรอยากบอก?",
-      sendBtn:    "ส่งข้อความ →",
+      sendBtn: "ส่งข้อความ →",
       sendingBtn: "กำลังส่ง...",
-      sentBtn:    "✓ ส่งสำเร็จแล้ว!",
-      copyHint:   "คัดลอก",
-      copied:     "✓ คัดลอกแล้ว!",
+      sentBtn: "✓ ส่งสำเร็จแล้ว!",
+      copyHint: "คัดลอก",
+      copied: "✓ คัดลอกแล้ว!",
       errors: {
-        nameRequired:    "กรุณากรอกชื่อ",
-        emailRequired:   "กรุณากรอกอีเมล",
-        emailInvalid:    "กรุณากรอกอีเมลที่ถูกต้อง",
+        nameRequired: "กรุณากรอกชื่อ",
+        emailRequired: "กรุณากรอกอีเมล",
+        emailInvalid: "กรุณากรอกอีเมลที่ถูกต้อง",
         messageRequired: "กรุณากรอกข้อความ",
         messageTooShort: "ข้อความสั้นเกินไป (ขั้นต่ำ 10 ตัวอักษร)",
       },
@@ -251,9 +274,9 @@ export const translations = {
       },
       experience: [
         {
-          role:    "นักศึกษาฝึกงาน IT Support",
-          company: "NAGA METAL SHEET CO.",
-          period:  "มี.ค. 2567 – มิ.ย. 2567",
+          role: "นักศึกษาฝึกงาน IT Support",
+          company: "บริษัท นาคา เมทัลชีท จำกัด",
+          period: "มี.ค. 2567 – มิ.ย. 2567",
           bullets: [
             "ติดตั้งและกำหนดค่าซอฟต์แวร์วิศวกรรม/ออกแบบสำหรับกระบวนการทำงานภายใน",
             "จัดทำเอกสารและคู่มือผู้ใช้อย่างเป็นระบบเพื่อเพิ่มประสิทธิภาพการทำงาน",
@@ -263,15 +286,16 @@ export const translations = {
         },
       ],
       education: {
-        degree:     "คอมพิวเตอร์ธุรกิจ",
+        degree: "คอมพิวเตอร์ธุรกิจ",
         university: "มหาวิทยาลัยมหาสารคาม",
-        period:     "มิ.ย. 2564 – พ.ค. 2568",
+        period: "มิ.ย. 2564 – พ.ค. 2568",
       },
       projects: [
         {
-          id:       1,
-          period:   "มี.ค. 2569",
-          subtitle: "ระบบ E-Commerce แบบ Fullstack พร้อม Admin Dashboard และระบบชำระเงิน",
+          id: 1,
+          period: "มี.ค. 2569",
+          subtitle:
+            "ระบบ E-Commerce แบบ Fullstack พร้อม Admin Dashboard และระบบชำระเงิน",
           bullets: [
             "สร้างระบบ E-Commerce แบบ Fullstack โดยใช้ Next.js App Router (Server Actions + Route Handlers)",
             "พัฒนาระบบ Role-Based Access Control สำหรับ CUSTOMER และ ADMIN พร้อม Protected Routes",
@@ -286,8 +310,8 @@ export const translations = {
           ],
         },
         {
-          id:       2,
-          period:   "ก.พ. 2569",
+          id: 2,
+          period: "ก.พ. 2569",
           subtitle: "ระบบจัดการการเช่าขั้นสูงและ Admin Management System",
           bullets: [
             "สร้าง Admin Panel สำหรับจัดการวงจรชีวิตการเช่าตั้งแต่การจองจนเสร็จสิ้น",
@@ -302,9 +326,10 @@ export const translations = {
           ],
         },
         {
-          id:       3,
-          period:   "ธ.ค. 2567 – ก.พ. 2568",
-          subtitle: "โปรเจกต์จบการศึกษา ระบบเช่าชุดแบบ Dual-App (ลูกค้าและ Back Office)",
+          id: 3,
+          period: "ธ.ค. 2567 – ก.พ. 2568",
+          subtitle:
+            "โปรเจกต์จบการศึกษา ระบบเช่าชุดแบบ Dual-App (ลูกค้าและ Back Office)",
           bullets: [
             "สถาปัตยกรรม Dual-Frontend: Customer App + Admin Panel แต่ละส่วนมี Role-Based Access แบบอิสระ (owner / user) ผ่าน JWT Middleware",
             "Schema PostgreSQL รองรับวงจรชีวิตการเช่าแบบสมบูรณ์: PENDING → CONFIRMED → ACTIVE → RETURNED → COMPLETED",
@@ -317,8 +342,8 @@ export const translations = {
           ],
         },
         {
-          id:       4,
-          period:   "ก.ค. 2567 – ต.ค. 2567",
+          id: 4,
+          period: "ก.ค. 2567 – ต.ค. 2567",
           subtitle: "ระบบจัดการสินค้าคงคลังและการขายพร้อมโมดูลซ่อม",
           bullets: [
             "สร้างด้วย Next.js 14 (App Router), TypeScript และ Tailwind CSS สำหรับประสบการณ์จัดการร้านที่ตอบสนองทุกอุปกรณ์",
@@ -332,6 +357,18 @@ export const translations = {
           ],
         },
       ],
+    },
+
+    lightbox: {
+      close: "[ ESC ] ปิด",
+      zoom: "⊕ ซูม",
+    },
+
+    skillCategories: {
+      languages: "ภาษาโปรแกรม",
+      frameworks: "เฟรมเวิร์ก & ไลบรารี",
+      databases: "ฐานข้อมูล",
+      tools: "เครื่องมือ & แพลตฟอร์ม",
     },
   },
 };

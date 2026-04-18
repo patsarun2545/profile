@@ -177,7 +177,7 @@ export default function ProjectCard({ project, isMobile }) {
         )}
 
         {/* Expandable content */}
-        <div style={{ maxHeight: open ? 800 : 0, overflow: "hidden", transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)" }}>
+        <div style={{ maxHeight: open ? 2000 : 0, overflow: "hidden", transition: "max-height 0.4s cubic-bezier(0.4,0,0.2,1)" }}>
           {/* Screenshots */}
           {hasImages && (
             <div style={{ display: "flex", gap: 10, overflowX: "auto", marginTop: 20, paddingBottom: 10 }}>
@@ -234,7 +234,7 @@ export default function ProjectCard({ project, isMobile }) {
                         borderRadius: 2,
                       }}
                     >
-                      ⊕ zoom
+                      {t.lightbox.zoom}
                     </span>
                   </div>
                 </div>

@@ -1,4 +1,8 @@
-import { onlineDressImages, adminPanelImages, nextjsEcomImages } from "../data/images";
+import {
+  onlineDressImages,
+  adminPanelImages,
+  nextjsEcomImages,
+} from "../data/images";
 
 export const PROFILE = {
   name: "Patsarun Kathinthong",
@@ -8,12 +12,33 @@ export const PROFILE = {
   github: "github.com/patsarun2545",
 };
 
-export const SKILLS = {
-  Languages: ["JavaScript (ES6+)", "TypeScript", "SQL", "Python", "HTML5", "CSS3"],
-  "Frameworks & Libs": ["React.js", "Next.js", "Node.js", "Express.js", "Nest.js", "Tailwind", "Bootstrap"],
-  Databases: ["PostgreSQL", "MongoDB", "MySQL", "Prisma ORM"],
-  "Tools & Platforms": ["Git", "GitHub", "Postman", "Ubuntu Linux", "PM2"],
-};
+export const SKILLS = [
+  {
+    key: "languages",
+    items: [
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "SQL",
+      "Python",
+      "HTML5",
+      "CSS3",
+    ],
+  },
+  {
+    key: "frameworks",
+    items: [
+      "React.js",
+      "Next.js",
+      "Node.js",
+      "Express.js",
+      "Nest.js",
+      "Tailwind",
+      "Bootstrap",
+    ],
+  },
+  { key: "databases", items: ["PostgreSQL", "MongoDB", "MySQL", "Prisma ORM"] },
+  { key: "tools", items: ["Git", "GitHub", "Postman", "Ubuntu Linux", "PM2"] },
+];
 
 export const PROJECTS = [
   {
@@ -25,7 +50,16 @@ export const PROJECTS = [
     color: "#22c55e",
     colorRgb: "34,197,94",
     screens: nextjsEcomImages,
-    tags: ["Next.js", "React", "PostgreSQL", "Prisma", "Tailwind CSS", "JWT", "Zod", "ImageKit"],
+    tags: [
+      "Next.js",
+      "React",
+      "PostgreSQL",
+      "Prisma",
+      "Tailwind CSS",
+      "JWT",
+      "Zod",
+      "ImageKit",
+    ],
   },
   {
     id: 2,
@@ -36,18 +70,37 @@ export const PROJECTS = [
     color: "#60a5fa",
     colorRgb: "96,165,250",
     screens: adminPanelImages,
-    tags: ["PostgreSQL", "Express.js", "React.js", "Node.js", "JWT", "RBAC", "Prisma ORM"],
+    tags: [
+      "PostgreSQL",
+      "Express.js",
+      "React.js",
+      "Node.js",
+      "JWT",
+      "RBAC",
+      "Prisma ORM",
+    ],
   },
   {
     id: 3,
     repo: "https://github.com/patsarun2545/dress-rental-web",
     title: "Dress Rental Web",
-    url: ["https://dress-rental-web-wtnm.vercel.app/", "https://dress-rental-web.vercel.app/"],
+    url: [
+      "https://dress-rental-web-wtnm.vercel.app/",
+      "https://dress-rental-web.vercel.app/",
+    ],
     stack: "PERN Stack",
     color: "#e879f9",
     colorRgb: "232,121,249",
     screens: onlineDressImages,
-    tags: ["PostgreSQL", "Express.js", "React.js", "Node.js", "JWT", "RBAC", "Prisma"],
+    tags: [
+      "PostgreSQL",
+      "Express.js",
+      "React.js",
+      "Node.js",
+      "JWT",
+      "RBAC",
+      "Prisma",
+    ],
   },
   {
     id: 4,
@@ -57,6 +110,16 @@ export const PROJECTS = [
     color: "#fb923c",
     colorRgb: "251,146,60",
     screens: [],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Prisma", "Node.js", "JWT", "PM2", "Ubuntu"],
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
+      "Prisma",
+      "Node.js",
+      "JWT",
+      "PM2",
+      "Ubuntu",
+    ],
   },
 ];
