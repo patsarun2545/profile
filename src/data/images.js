@@ -6,14 +6,26 @@ const loadImages = (glob) =>
     })
     .map((k) => glob[k].default ?? glob[k]);
 
+export const mobileStoreImages = loadImages(
+  import.meta.glob("../assets/mobile_store/*.png", { eager: true }),
+);
+
 export const onlineDressImages = loadImages(
-  import.meta.glob("../assets/online_dress/*.png", { eager: true })
+  import.meta.glob("../assets/online_dress/*.png", { eager: true }),
 );
 
 export const adminPanelImages = loadImages(
-  import.meta.glob("../assets/admin_panel/*.png", { eager: true })
+  import.meta.glob("../assets/admin_panel/*.png", { eager: true }),
 );
 
 export const nextjsEcomImages = loadImages(
-  import.meta.glob("../assets/nextjs_ecommerce/*.png", { eager: true })
+  import.meta.glob("../assets/nextjs_ecommerce/*.png", { eager: true }),
+);
+
+export const streamLiveImages = loadImages(
+  import.meta.glob("../assets/stream_live/*.png", { eager: true }),
+);
+
+export const taskManagerImages = loadImages(
+  import.meta.glob("../assets/task_manager/*.png", { eager: true }),
 );

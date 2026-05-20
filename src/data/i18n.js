@@ -107,6 +107,39 @@ export const translations = {
       projects: [
         {
           id: 1,
+          period: "May 2026",
+          subtitle:
+            "Full-Stack Live Streaming Platform with RTMP, HLS & Real-Time Chat",
+          bullets: [
+            "Built full-stack live streaming platform using Next.js (App Router) and Express.js",
+            "RTMP ingest via OBS — automatically transcoded to HLS using FFmpeg pipeline",
+            "Low-latency HLS playback with hls.js and Safari native fallback",
+            "Real-time live chat per stream room via WebSocket with auto-reconnect",
+            "Live viewer count tracked via RTMP play/done events",
+            "Streamer dashboard — go live, manage stream, view history, reset stream key",
+            "Search and filter streams by category with debounced input and pagination",
+            "Dual roles: viewer and streamer with role-guarded routes",
+            "SSR meta tags, Open Graph, JSON-LD, sitemap.xml and robots.txt for SEO",
+            "Rate limiting on auth endpoints",
+          ],
+        },
+        {
+          id: 2,
+          period: "Apr 2026",
+          subtitle:
+            "Full-Stack Task Management App with Drag-and-Drop & Full Test Coverage",
+          bullets: [
+            "Built full-stack task management application with JWT authentication and protected routes",
+            "Drag-and-drop task reordering persisted to the database via an order field",
+            "Subtask system — create and manage nested tasks inside each task",
+            "Filter tasks by status and priority with a summary bar showing counts",
+            "Middleware stack: JWT auth, rate limiting, input sanitization, and request validation",
+            "Full test coverage — Vitest + React Testing Library (client) and Jest (server)",
+            "CI pipeline via GitHub Actions",
+          ],
+        },
+        {
+          id: 3,
           period: "Mar 2026",
           subtitle: "Fullstack E-Commerce with Admin Dashboard & Payment Flow",
           bullets: [
@@ -123,7 +156,7 @@ export const translations = {
           ],
         },
         {
-          id: 2,
+          id: 4,
           period: "Feb 2026",
           subtitle: "Advanced Rental Workflow & Admin Management System",
           bullets: [
@@ -139,7 +172,7 @@ export const translations = {
           ],
         },
         {
-          id: 3,
+          id: 5,
           period: "Dec 2024 – Feb 2025",
           subtitle:
             "Graduation Project Dual-App Rental Platform (Customer & Back Office)",
@@ -155,7 +188,7 @@ export const translations = {
           ],
         },
         {
-          id: 4,
+          id: 6,
           period: "Jul 2024 – Oct 2024",
           subtitle: "Inventory & Sales Management System with Repair Module",
           bullets: [
@@ -293,6 +326,39 @@ export const translations = {
       projects: [
         {
           id: 1,
+          period: "พ.ค. 2569",
+          subtitle:
+            "แพลตฟอร์ม Live Streaming แบบ Full-Stack พร้อม RTMP, HLS และแชทแบบ Real-Time",
+          bullets: [
+            "สร้างแพลตฟอร์ม Live Streaming แบบ Full-Stack โดยใช้ Next.js (App Router) และ Express.js",
+            "รับ RTMP stream ผ่าน OBS — แปลงเป็น HLS อัตโนมัติด้วย FFmpeg pipeline",
+            "เล่นวิดีโอ HLS ความหน่วงต่ำด้วย hls.js พร้อม Safari native fallback",
+            "แชทสดแบบ Real-Time ในแต่ละห้อง stream ผ่าน WebSocket พร้อม Auto-Reconnect",
+            "นับจำนวนผู้ชมสดผ่าน RTMP play/done events",
+            "Streamer Dashboard — ไลฟ์สด, จัดการ stream, ดูประวัติ, รีเซ็ต stream key",
+            "ค้นหาและกรอง stream ตามหมวดหมู่ พร้อม Debounced Input และ Pagination",
+            "สองบทบาท: viewer และ streamer พร้อม Route Guard",
+            "SSR Meta Tags, Open Graph, JSON-LD, sitemap.xml และ robots.txt สำหรับ SEO",
+            "Rate Limiting บน Auth endpoints",
+          ],
+        },
+        {
+          id: 2,
+          period: "เม.ย. 2569",
+          subtitle:
+            "แอป Task Management แบบ Full-Stack พร้อม Drag-and-Drop และ Test Coverage ครบถ้วน",
+          bullets: [
+            "สร้างแอปจัดการงานแบบ Full-Stack พร้อม JWT Authentication และ Protected Routes",
+            "ลากวางเพื่อเรียงลำดับงาน บันทึกลงฐานข้อมูลผ่าน order field",
+            "ระบบ Subtask — สร้างและจัดการงานย่อยภายในแต่ละงาน",
+            "กรองงานตามสถานะและลำดับความสำคัญ พร้อมแถบสรุปจำนวน",
+            "Middleware stack: JWT auth, rate limiting, input sanitization และ request validation",
+            "Test Coverage ครบถ้วน — Vitest + React Testing Library (client) และ Jest (server)",
+            "CI pipeline ผ่าน GitHub Actions",
+          ],
+        },
+        {
+          id: 3,
           period: "มี.ค. 2569",
           subtitle:
             "ระบบ E-Commerce แบบ Fullstack พร้อม Admin Dashboard และระบบชำระเงิน",
@@ -310,7 +376,7 @@ export const translations = {
           ],
         },
         {
-          id: 2,
+          id: 4,
           period: "ก.พ. 2569",
           subtitle: "ระบบจัดการการเช่าขั้นสูงและ Admin Management System",
           bullets: [
@@ -326,7 +392,7 @@ export const translations = {
           ],
         },
         {
-          id: 3,
+          id: 5,
           period: "ธ.ค. 2567 – ก.พ. 2568",
           subtitle:
             "โปรเจกต์จบการศึกษา ระบบเช่าชุดแบบ Dual-App (ลูกค้าและ Back Office)",
@@ -342,7 +408,7 @@ export const translations = {
           ],
         },
         {
-          id: 4,
+          id: 6,
           period: "ก.ค. 2567 – ต.ค. 2567",
           subtitle: "ระบบจัดการสินค้าคงคลังและการขายพร้อมโมดูลซ่อม",
           bullets: [
