@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { useLang } from "../hooks/useLang";
+import { useTheme } from "../hooks/useTheme";
+import Logo from "./Logo";
+import styles from "../styles/layout.module.css";
 
 export default function Nav({ active }) {
   const bp = useBreakpoint();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = bp === "xs" || bp === "sm";
-  const { lang, toggle, t } = useLang();
+  const { lang, toggle: toggleLang, t } = useLang();
+  const { theme, toggle: toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -16,67 +20,29 @@ export default function Nav({ active }) {
   }, []);
 
   const links = [
-    { id: "about",      label: t.nav.about },
-    { id: "projects",   label: t.nav.projects },
-    { id: "skills",     label: t.nav.skills },
+    { id: "about", label: t.nav.about },
+    { id: "projects", label: t.nav.projects },
+    { id: "skills", label: t.nav.skills },
     { id: "experience", label: t.nav.experience },
-    { id: "contact",    label: t.nav.contact },
+    { id: "contact", label: t.nav.contact },
   ];
 
   return (
     <>
       <nav
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 200,
-          padding: isMobile ? "0 20px" : "0 48px",
-          height: 60,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          backdropFilter: scrolled || menuOpen ? "blur(24px)" : "none",
-          background: scrolled || menuOpen ? "rgba(26,26,26,0.95)" : "transparent",
-          borderBottom: scrolled ? "1px solid rgba(34,197,94,0.08)" : "1px solid transparent",
-          transition: "all 0.3s",
-        }}
+        className={`${styles.nav} ${isMobile ? styles.navMobile : ""} ${scrolled || menuOpen ? styles.navScrolled : ""}`}
       >
         {/* Logo */}
-        <div
-          style={{
-            fontFamily: "'Fira Code', monospace",
-            fontSize: 14,
-            color: "#22c55e",
-            letterSpacing: "0.05em",
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-          }}
-        >
-          <span style={{ opacity: 0.5 }}>{"<"}</span>PS
-          <span style={{ opacity: 0.5 }}>{"/>"}</span>
-        </div>
+        <Logo />
 
         {/* Desktop links + toggle */}
         {!isMobile && (
-          <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <div className={styles.desktopLinks}>
             {links.map((l) => (
               <a
                 key={l.id}
                 href={`#${l.id}`}
-                style={{
-                  padding: "7px 14px",
-                  fontFamily: "'Fira Code', monospace",
-                  fontSize: 11,
-                  color: active === l.id ? "#22c55e" : "rgba(255,255,255,0.65)",
-                  textDecoration: "none",
-                  background: active === l.id ? "rgba(34,197,94,0.08)" : "transparent",
-                  borderRadius: 4,
-                  transition: "all 0.2s",
-                  letterSpacing: "0.03em",
-                }}
+                className={`${styles.navLink} ${active === l.id ? styles.navLinkActive : ""}`}
               >
                 {l.label}
               </a>
@@ -84,71 +50,58 @@ export default function Nav({ active }) {
 
             {/* Language toggle button */}
             <button
-              onClick={toggle}
-              style={{
-                marginLeft: 10,
-                padding: "5px 12px",
-                fontFamily: "'Fira Code', monospace",
-                fontSize: 11,
-                color: "#22c55e",
-                background: "rgba(34,197,94,0.08)",
-                border: "1px solid rgba(34,197,94,0.30)",
-                borderRadius: 4,
-                cursor: "pointer",
-                letterSpacing: "0.08em",
-                fontWeight: 700,
-                transition: "all 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(34,197,94,0.18)";
-                e.currentTarget.style.borderColor = "rgba(34,197,94,0.6)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(34,197,94,0.08)";
-                e.currentTarget.style.borderColor = "rgba(34,197,94,0.30)";
-              }}
+              onClick={toggleLang}
+              aria-label="Toggle language"
+              aria-pressed={lang === "th"}
+              className={styles.langButton}
             >
               {lang === "en" ? "TH" : "EN"}
+            </button>
+
+            {/* Theme toggle button */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              aria-pressed={theme === "light"}
+              className={styles.langButton}
+            >
+              {theme === "dark" ? "☀️" : "🌙"}
             </button>
           </div>
         )}
 
-        {/* Mobile: lang toggle + hamburger */}
+        {/* Mobile: lang toggle + theme toggle + hamburger */}
         {isMobile && (
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div className={styles.mobileControls}>
             <button
-              onClick={toggle}
-              style={{
-                padding: "4px 10px",
-                fontFamily: "'Fira Code', monospace",
-                fontSize: 10,
-                color: "#22c55e",
-                background: "rgba(34,197,94,0.08)",
-                border: "1px solid rgba(34,197,94,0.30)",
-                borderRadius: 4,
-                cursor: "pointer",
-                letterSpacing: "0.05em",
-                fontWeight: 700,
-              }}
+              onClick={toggleLang}
+              aria-label="Toggle language"
+              aria-pressed={lang === "th"}
+              className={`${styles.langButton} ${styles.langButtonMobile}`}
             >
               {lang === "en" ? "TH" : "EN"}
             </button>
             <button
-              onClick={() => setMenuOpen((o) => !o)}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 8,
-                display: "flex",
-                flexDirection: "column",
-                gap: 5,
-                alignItems: "flex-end",
-              }}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              aria-pressed={theme === "light"}
+              className={`${styles.langButton} ${styles.langButtonMobile}`}
             >
-              <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: 22, transition: "all 0.25s", transform: menuOpen ? "translateY(7px) rotate(45deg)" : "none" }} />
-              <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: 16, transition: "all 0.25s", opacity: menuOpen ? 0 : 1 }} />
-              <span style={{ display: "block", height: 2, borderRadius: 2, background: "#22c55e", width: menuOpen ? 22 : 12, transition: "all 0.25s", transform: menuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }} />
+              {theme === "dark" ? "☀️" : "🌙"}
+            </button>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              className={styles.hamburger}
+            >
+              <span
+                className={`${styles.hamburgerLine} ${styles.hamburgerLine1} ${menuOpen ? styles.hamburgerLine1Open : ""}`}
+              />
+              <span
+                className={`${styles.hamburgerLine} ${styles.hamburgerLine2} ${menuOpen ? styles.hamburgerLine2Open : ""}`}
+              />
+              <span
+                className={`${styles.hamburgerLine} ${styles.hamburgerLine3} ${menuOpen ? styles.hamburgerLine3Open : ""}`}
+              />
             </button>
           </div>
         )}
@@ -157,36 +110,15 @@ export default function Nav({ active }) {
       {/* Mobile menu */}
       {isMobile && (
         <div
-          style={{
-            position: "fixed",
-            top: 60,
-            left: 0,
-            right: 0,
-            zIndex: 199,
-            background: "rgba(26,26,26,0.98)",
-            backdropFilter: "blur(20px)",
-            borderBottom: "1px solid rgba(34,197,94,0.1)",
-            maxHeight: menuOpen ? 320 : 0,
-            overflow: "hidden",
-            transition: "max-height 0.35s cubic-bezier(0.4,0,0.2,1)",
-          }}
+          className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ""}`}
         >
           {links.map((l) => (
             <a
               key={l.id}
               href={`#${l.id}`}
               onClick={() => setMenuOpen(false)}
-              style={{
-                display: "block",
-                padding: "16px 24px",
-                fontFamily: "'Fira Code', monospace",
-                fontSize: 13,
-                color: active === l.id ? "#22c55e" : "rgba(255,255,255,0.7)",
-                textDecoration: "none",
-                borderLeft: `3px solid ${active === l.id ? "#22c55e" : "transparent"}`,
-                background: active === l.id ? "rgba(34,197,94,0.05)" : "transparent",
-                transition: "all 0.2s",
-              }}
+              aria-current={active === l.id ? "page" : undefined}
+              className={`${styles.mobileNavLink} ${active === l.id ? styles.mobileNavLinkActive : ""}`}
             >
               {l.label}
             </a>

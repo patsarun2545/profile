@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "../styles/shared.module.css";
 
 export default function TypingText({ words, speed = 80, pause = 1800 }) {
   const [displayed, setDisplayed] = useState("");
@@ -45,11 +46,7 @@ export default function TypingText({ words, speed = 80, pause = 1800 }) {
     <span>
       {displayed}
       <span
-        style={{
-          opacity: blink ? 1 : 0,
-          color: "#22c55e",
-          transition: "opacity 0.1s",
-        }}
+        className={`${styles.typingCursor} ${blink ? "" : styles.typingCursorHidden}`}
       >
         |
       </span>
