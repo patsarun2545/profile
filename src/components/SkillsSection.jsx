@@ -3,19 +3,24 @@ import { useLang } from "../hooks/useLang";
 import Reveal from "../shared/Reveal";
 import SectionLabel from "../shared/SectionLabel";
 import { SKILLS } from "../data/data";
-import styles from "../styles/sections.module.css";
 
 export default function SkillsSection() {
   const bp = useBreakpoint();
   const isMobile = bp === "xs" || bp === "sm";
+  const px = isMobile ? "20px" : bp === "md" ? "32px" : "48px";
   const { t } = useLang();
 
   return (
     <section
       id="skills"
-      className={`${styles.skillsSection} ${isMobile ? styles.skillsSectionMobile : ""}`}
+      style={{
+        padding: `${isMobile ? 80 : 120}px ${px}`,
+        background: "rgba(34,197,94,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
     >
-      <div className={styles.skillsContainer}>
+      <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <Reveal>
           <SectionLabel
             number="03"
@@ -24,29 +29,75 @@ export default function SkillsSection() {
           />
         </Reveal>
         <div
-          className={`${styles.skillsList} ${isMobile ? styles.skillsListMobile : ""}`}
+          style={{
+            marginTop: isMobile ? 32 : 52,
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+          }}
         >
           {SKILLS.map((cat, catIdx) => (
             <Reveal key={cat.key} delay={0.08 + catIdx * 0.1}>
-              <div className={styles.categoryCard}>
+              <div
+                style={{
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  borderRadius: 4,
+                  overflow: "hidden",
+                  background: "#1a1a1a",
+                }}
+              >
                 <div
-                  className={`${styles.categoryHeader} ${isMobile ? styles.categoryHeaderMobile : ""}`}
+                  style={{
+                    padding: isMobile ? "10px 14px" : "12px 20px",
+                    borderBottom: "1px solid rgba(255,255,255,0.07)",
+                    background: "rgba(34,197,94,0.04)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                  }}
                 >
-                  <div className={styles.categoryDot} />
+                  <div
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: "#22c55e",
+                      flexShrink: 0,
+                    }}
+                  />
                   <span
-                    className={`${styles.categoryTitle} ${isMobile ? styles.categoryTitleMobile : ""}`}
+                    style={{
+                      fontFamily: "'Fira Code', monospace",
+                      fontSize: isMobile ? 10 : 11,
+                      color: "#22c55e",
+                      letterSpacing: "0.1em",
+                    }}
                   >
                     {t.skillCategories[cat.key]}
                   </span>
                 </div>
                 <div
-                  className={`${styles.skillsInnerContainer} ${isMobile ? styles.skillsInnerContainerMobile : ""}`}
+                  style={{
+                    padding: isMobile ? "14px" : "18px 20px",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 8,
+                  }}
                 >
                   {cat.items.map((skill, i) => (
                     <div
                       key={skill}
-                      className={`${styles.skillBadge} ${isMobile ? styles.skillBadgeMobile : ""}`}
-                      style={{ "--delay": `${i * 0.04}s` }}
+                      style={{
+                        padding: isMobile ? "7px 11px" : "8px 14px",
+                        border: "1px solid rgba(34,197,94,0.2)",
+                        background: "rgba(34,197,94,0.04)",
+                        fontFamily: "'Fira Code', monospace",
+                        fontSize: isMobile ? 11 : 12,
+                        color: "#fff",
+                        letterSpacing: "0.03em",
+                        borderRadius: 2,
+                        animation: `fadeSlideIn 0.25s ease ${i * 0.04}s both`,
+                      }}
                     >
                       {skill}
                     </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./styles/index.css";
+import "./index.css";
 import Nav from "./components/Nav";
 import HeroSection from "./components/HeroSection";
 import ProjectsSection from "./components/ProjectsSection";
@@ -8,8 +8,6 @@ import ExperienceSection from "./components/ExperienceSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
 import { LangProvider } from "./context/LangProvider";
-import { ThemeProvider } from "./context/ThemeProvider";
-import styles from "./styles/layout.module.css";
 
 export default function App() {
   const [activeSection, setActiveSection] = useState("about");
@@ -38,22 +36,17 @@ export default function App() {
 
   return (
     <>
-      <ThemeProvider>
-        <LangProvider>
-          <a href="#main-content" className={styles.skipLink}>
-            Skip to main content
-          </a>
-          <Nav active={activeSection} />
-          <main id="main-content" className={styles.main}>
-            <HeroSection />
-            <ProjectsSection />
-            <SkillsSection />
-            <ExperienceSection />
-            <ContactSection />
-          </main>
-          <Footer />
-        </LangProvider>
-      </ThemeProvider>
+      <LangProvider>
+        <Nav active={activeSection} />
+        <main style={{ background: "#1a1a1a" }}>
+          <HeroSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <ExperienceSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </LangProvider>
     </>
   );
 }

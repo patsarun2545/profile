@@ -1,25 +1,22 @@
 import { useScrollReveal } from "../hooks/useScrollReveal";
-import styles from "../styles/shared.module.css";
 
-export default function Reveal({
-  children,
-  delay = 0,
-  direction = "up",
-  style = {},
-}) {
+export default function Reveal({ children, delay = 0, direction = "up", style = {} }) {
   const [ref, visible] = useScrollReveal();
-  const directionClasses = {
-    up: styles.revealUp,
-    down: styles.revealDown,
-    left: styles.revealLeft,
-    right: styles.revealRight,
+  const transforms = {
+    up: "translateY(32px)",
+    down: "translateY(-32px)",
+    left: "translateX(-32px)",
+    right: "translateX(32px)",
   };
-
   return (
     <div
       ref={ref}
-      className={`${styles.reveal} ${visible ? styles.revealVisible : ""} ${directionClasses[direction]}`}
-      style={{ "--delay": `${delay}s`, ...style }}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "none" : transforms[direction],
+        transition: `opacity 0.65s ${delay}s cubic-bezier(0.22,1,0.36,1), transform 0.65s ${delay}s cubic-bezier(0.22,1,0.36,1)`,
+        ...style,
+      }}
     >
       {children}
     </div>

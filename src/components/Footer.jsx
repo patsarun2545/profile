@@ -1,6 +1,5 @@
 import { useBreakpoint } from "../hooks/useBreakpoint";
 import { useLang } from "../hooks/useLang";
-import styles from "../styles/layout.module.css";
 
 export default function Footer() {
   const bp = useBreakpoint();
@@ -9,12 +8,23 @@ export default function Footer() {
 
   return (
     <footer
-      className={`${styles.footer} ${isMobile ? styles.footerMobile : ""}`}
+      style={{
+        padding: `18px ${isMobile ? "20px" : "48px"}`,
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        gap: isMobile ? 4 : 0,
+        textAlign: "center",
+      }}
     >
-      <span className={styles.copyright}>
+      <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: "rgba(255,255,255,0.35)" }}>
         © {new Date().getFullYear()} Patsarun Kathinthong
       </span>
-      <span className={styles.role}>{t.footer.role}</span>
+      <span style={{ fontFamily: "'Fira Code', monospace", fontSize: 10, color: "rgba(255,255,255,0.3)" }}>
+        {t.footer.role}
+      </span>
     </footer>
   );
 }
