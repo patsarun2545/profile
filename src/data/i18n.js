@@ -107,6 +107,21 @@ export const translations = {
       projects: [
         {
           id: 1,
+          period: "Jun 2026",
+          subtitle: "AI-Powered Document Chat Application with RAG Pipeline",
+          bullets: [
+            "Built AI-powered document chat application using Next.js 16, React 19, and TypeScript",
+            "Implemented RAG (Retrieval-Augmented Generation) pipeline with Gemini AI for intelligent document understanding",
+            "PostgreSQL 16 with pgvector extension for semantic similarity search and vector embeddings",
+            "Document processing: automatic parsing (PDF/DOCX/TXT), chunking (500 words with 50 overlap), and vector embedding",
+            "Real-time streaming AI responses from Gemini 3.1 Flash Lite with source attribution and context awareness",
+            "JWT-based authentication with 7-day session cookies and bcrypt password hashing",
+            "Per-document chat sessions with message persistence and conversation history",
+            "Rate limiting (auth: 10 req/15min, api: 60 req/1min) and automatic stuck document recovery",
+          ],
+        },
+        {
+          id: 2,
           period: "May 2026",
           subtitle:
             "Full-Stack Live Streaming Platform with RTMP, HLS & Real-Time Chat",
@@ -124,7 +139,7 @@ export const translations = {
           ],
         },
         {
-          id: 2,
+          id: 3,
           period: "Apr 2026",
           subtitle:
             "Full-Stack Task Management App with Drag-and-Drop & Full Test Coverage",
@@ -139,7 +154,7 @@ export const translations = {
           ],
         },
         {
-          id: 3,
+          id: 4,
           period: "Mar 2026",
           subtitle: "Fullstack E-Commerce with Admin Dashboard & Payment Flow",
           bullets: [
@@ -156,7 +171,7 @@ export const translations = {
           ],
         },
         {
-          id: 4,
+          id: 5,
           period: "Feb 2026",
           subtitle: "Advanced Rental Workflow & Admin Management System",
           bullets: [
@@ -172,7 +187,7 @@ export const translations = {
           ],
         },
         {
-          id: 5,
+          id: 6,
           period: "Dec 2024 – Feb 2025",
           subtitle:
             "Graduation Project Dual-App Rental Platform (Customer & Back Office)",
@@ -188,7 +203,7 @@ export const translations = {
           ],
         },
         {
-          id: 6,
+          id: 7,
           period: "Jul 2024 – Oct 2024",
           subtitle: "Inventory & Sales Management System with Repair Module",
           bullets: [
@@ -326,6 +341,21 @@ export const translations = {
       projects: [
         {
           id: 1,
+          period: "มิ.ย. 2569",
+          subtitle: "แอปแชทเอกสารด้วย AI พร้อม RAG Pipeline",
+          bullets: [
+            "สร้างแอปแชทเอกสารด้วย AI โดยใช้ Next.js 16, React 19 และ TypeScript",
+            "พัฒนา RAG (Retrieval-Augmented Generation) pipeline ด้วย Gemini AI สำหรับการเข้าใจเอกสารอัจฉริยะ",
+            "PostgreSQL 16 พร้อมส่วนขยาย pgvector สำหรับการค้นหาความคล้ายคลึงทางความหมายและ vector embeddings",
+            "การประมวลผลเอกสาร: แยกวิเคราะห์อัตโนมัติ (PDF/DOCX/TXT), แบ่งส่วน (500 คำกับ 50 คำซ้ำ) และสร้าง vector embedding",
+            "การตอบกลับ AI แบบ Real-time streaming จาก Gemini 3.1 Flash Lite พร้อมการอ้างอิงแหล่งที่มาและความตระหนักถึงบริบท",
+            "Authentication ด้วย JWT พร้อม session cookies 7 วันและ bcrypt password hashing",
+            "เซสชันแชทต่อเอกสารพร้อมการบันทึกข้อความและประวัติการสนทนา",
+            "Rate limiting (auth: 10 req/15min, api: 60 req/1min) และการกู้คืนเอกสารที่ค้างอัตโนมัติ",
+          ],
+        },
+        {
+          id: 2,
           period: "พ.ค. 2569",
           subtitle:
             "แพลตฟอร์ม Live Streaming แบบ Full-Stack พร้อม RTMP, HLS และแชทแบบ Real-Time",
@@ -343,7 +373,7 @@ export const translations = {
           ],
         },
         {
-          id: 2,
+          id: 3,
           period: "เม.ย. 2569",
           subtitle:
             "แอป Task Management แบบ Full-Stack พร้อม Drag-and-Drop และ Test Coverage ครบถ้วน",
@@ -358,7 +388,7 @@ export const translations = {
           ],
         },
         {
-          id: 3,
+          id: 4,
           period: "มี.ค. 2569",
           subtitle:
             "ระบบ E-Commerce แบบ Fullstack พร้อม Admin Dashboard และระบบชำระเงิน",
@@ -376,7 +406,7 @@ export const translations = {
           ],
         },
         {
-          id: 4,
+          id: 5,
           period: "ก.พ. 2569",
           subtitle: "ระบบจัดการการเช่าขั้นสูงและ Admin Management System",
           bullets: [
@@ -392,7 +422,7 @@ export const translations = {
           ],
         },
         {
-          id: 5,
+          id: 6,
           period: "ธ.ค. 2567 – ก.พ. 2568",
           subtitle:
             "โปรเจกต์จบการศึกษา ระบบเช่าชุดแบบ Dual-App (ลูกค้าและ Back Office)",
@@ -408,7 +438,7 @@ export const translations = {
           ],
         },
         {
-          id: 6,
+          id: 7,
           period: "ก.ค. 2567 – ต.ค. 2567",
           subtitle: "ระบบจัดการสินค้าคงคลังและการขายพร้อมโมดูลซ่อม",
           bullets: [

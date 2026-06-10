@@ -30,10 +30,10 @@ export default function HeroSection() {
     <section
       id="about"
       style={{
-        minHeight: isMobile ? "auto" : "100vh",
+        minHeight: isMobile ? "auto" : isTablet ? "auto" : "100vh",
         display: "flex",
         alignItems: "center",
-        padding: `80px ${px} ${isMobile ? "80px" : "100px"}`,
+        padding: `${isMobile ? "80px" : isTablet ? "100px" : "120px"} ${px} ${isMobile ? "80px" : isTablet ? "100px" : "120px"}`,
         position: "relative",
         overflow: "hidden",
         borderBottom: "1px solid rgba(255,255,255,0.10)",

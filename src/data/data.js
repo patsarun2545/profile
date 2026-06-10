@@ -5,6 +5,7 @@ import {
   streamLiveImages,
   taskManagerImages,
   mobileStoreImages,
+  documindImages,
 } from "../data/images";
 
 export const PROFILE = {
@@ -46,6 +47,26 @@ export const SKILLS = [
 export const PROJECTS = [
   {
     id: 1,
+    repo: null,
+    title: "DocuMind-AI",
+    url: "https://documind-ai-green.vercel.app/",
+    stack: "Next.js + AI",
+    color: "#fbbf24",
+    colorRgb: "251,191,36",
+    screens: documindImages,
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "pgvector",
+      "Gemini AI",
+      "RAG",
+      "JWT",
+      "Prisma",
+    ],
+  },
+  {
+    id: 2,
     repo: "https://github.com/patsarun2545/streaming-app",
     title: "StreamLive",
     url: null,
@@ -65,7 +86,7 @@ export const PROJECTS = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     repo: "https://github.com/patsarun2545/Task-Manager",
     title: "Task Manager",
     url: "https://task-manager-green-psi.vercel.app/",
@@ -86,7 +107,7 @@ export const PROJECTS = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     repo: "https://github.com/patsarun2545/nextjs-ecommerce-platform",
     title: "Next.js E-Commerce Platform",
     url: "https://nextjs-ecommerce-platform-gamma.vercel.app/",
@@ -106,7 +127,7 @@ export const PROJECTS = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     repo: "https://github.com/patsarun2545/rental-management-system",
     title: "Rental Management System",
     url: "https://rental-management-system-blush.vercel.app/",
@@ -125,7 +146,7 @@ export const PROJECTS = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     repo: "https://github.com/patsarun2545/dress-rental-web",
     title: "Dress Rental Web",
     url: [
@@ -147,9 +168,10 @@ export const PROJECTS = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     repo: "https://github.com/patsarun2545/mobile-store-web",
     title: "Mobile Store Web",
+    url: "https://mobile-store-web-jet.vercel.app/",
     stack: "MERN Stack",
     color: "#e879f9",
     colorRgb: "232,121,249",
