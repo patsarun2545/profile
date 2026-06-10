@@ -2,13 +2,293 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/profile/vite.svg" />
+    <meta http-equiv="refresh" content="3; url=https://portfolio-patsarun.vercel.app/" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>profile</title>
-    <script type="module" crossorigin src="/profile/assets/index-C5FtHgEI.js"></script>
-    <link rel="stylesheet" crossorigin href="/profile/assets/index-4uJ2z0VF.css">
+    <title>Redirecting to new portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Fira+Code:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+        background: #1a1a1a;
+      }
+      
+      body {
+        background: #1a1a1a;
+        color: #fff;
+        font-family: 'DM Sans', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      
+      .container {
+        text-align: center;
+        max-width: 480px;
+        width: 100%;
+        padding: 3rem 2rem;
+        animation: fadeSlideIn 0.8s ease-out;
+      }
+      
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .icon {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        animation: fadeIn 1.2s ease-out;
+        color: #22c55e;
+      }
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      .loader {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 2.5rem;
+        position: relative;
+      }
+      
+      .loader::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 3px solid rgba(34, 197, 94, 0.15);
+        border-top-color: #22c55e;
+        border-radius: 50%;
+        animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+      }
+      
+      .loader::after {
+        content: '';
+        position: absolute;
+        width: 70%;
+        height: 70%;
+        top: 15%;
+        left: 15%;
+        border: 2px solid rgba(34, 197, 94, 0.1);
+        border-right-color: rgba(34, 197, 94, 0.4);
+        border-radius: 50%;
+        animation: spin 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite reverse;
+      }
+      
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      
+      h1 {
+        font-family: 'Syne', sans-serif;
+        font-weight: 800;
+        font-size: 2.25rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.03em;
+        line-height: 1.2;
+        background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .message {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 3px;
+        background: rgba(34, 197, 94, 0.15);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+      }
+      
+      .progress-bar::after {
+        content: '';
+        display: block;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(90deg, #22c55e, #4ade80);
+        animation: progress 2.5s ease-in-out infinite;
+        transform-origin: left;
+        border-radius: 2px;
+      }
+      
+      @keyframes progress {
+        0% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      
+      .manual-link {
+        font-family: 'Fira Code', monospace;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 1rem;
+      }
+      
+      a {
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #22c55e;
+        text-decoration: none;
+        padding: 14px 32px;
+        border: 1.5px solid rgba(34, 197, 94, 0.4);
+        border-radius: 6px;
+        display: inline-block;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+        transition: left 0.5s ease;
+      }
+      
+      a:hover {
+        background: rgba(34, 197, 94, 0.08);
+        border-color: #22c55e;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(34, 197, 94, 0.15);
+      }
+      
+      a:hover::before {
+        left: 100%;
+      }
+      
+      ::-webkit-scrollbar {
+        width: 3px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1a1a1a;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(34, 197, 94, 0.4);
+      }
+      
+      .lang-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6);
+        background: transparent;
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+      
+      .lang-toggle:hover {
+        color: #22c55e;
+        border-color: #22c55e;
+        background: rgba(34, 197, 94, 0.08);
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <button class="lang-toggle" id="langToggle">EN / TH</button>
+    <div class="container">
+      <div class="icon">→</div>
+      <div class="loader"></div>
+      <h1 id="title">กำลังย้ายไปพอร์ตโฟลิโอใหม่</h1>
+      <p class="message" id="message">เรากำลังพาคุณไปยังพอร์ตโฟลิโอใหม่</p>
+      <div class="progress-bar"></div>
+      <p class="manual-link" id="manualLink">หากไม่ถูกเปลี่ยนเส้นทางอัตโนมัติ</p>
+      <a href="https://portfolio-patsarun.vercel.app/" id="clickHere">คลิกที่นี่</a>
+    </div>
+    <script>
+      const translations = {
+        en: {
+          title: "Redirecting to new portfolio",
+          message: "We're taking you to the new portfolio",
+          manualLink: "If not redirected automatically",
+          clickHere: "Click here"
+        },
+        th: {
+          title: "กำลังย้ายไปพอร์ตโฟลิโอใหม่",
+          message: "เรากำลังพาคุณไปยังพอร์ตโฟลิโอใหม่",
+          manualLink: "หากไม่ถูกเปลี่ยนเส้นทางอัตโนมัติ",
+          clickHere: "คลิกที่นี่"
+        }
+      };
+
+      let currentLang = localStorage.getItem("lang") || "en";
+
+      function updateLanguage() {
+        const t = translations[currentLang];
+        document.getElementById("title").textContent = t.title;
+        document.getElementById("message").textContent = t.message;
+        document.getElementById("manualLink").textContent = t.manualLink;
+        document.getElementById("clickHere").textContent = t.clickHere;
+        document.getElementById("langToggle").textContent = currentLang === "en" ? "EN / TH" : "TH / EN";
+      }
+
+      function toggleLanguage() {
+        currentLang = currentLang === "en" ? "th" : "en";
+        localStorage.setItem("lang", currentLang);
+        updateLanguage();
+      }
+
+      document.getElementById("langToggle").addEventListener("click", toggleLanguage);
+      updateLanguage();
+
+      setTimeout(function() {
+        window.location.href = "https://portfolio-patsarun.vercel.app/";
+      }, 3000);
+    </script>
   </body>
 </html>
